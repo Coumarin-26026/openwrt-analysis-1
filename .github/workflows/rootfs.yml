@@ -1,0 +1,83 @@
+name: OpenWrt RootFS Extractor
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Install required tools
+      - name: Install tools
+        run: |
+          sudo apt update
+
+          sudo apt install -y \
+            binwalk \
+            squashfs-tools \
+            p7zip-full \
+            rsync \
+            file
+
+      # Show repository files
+      - name: Show repository files
+        run: |
+          echo "===== REPOSITORY FILES ====="
+          ls -lah
+
+      # Extract firmware
+      - name: Extract firmware
+        run: |
+          sudo binwalk --run-as=root -eM \
+          x-wrt-26.04-b202605170835-ipq806x-generic-ruijie_rg-mtfi-m520-squashfs-factory.bin
+
+      # Fix permissions
+      - name: Fix permissions
+        run: |
+          sudo chmod -R 755 .
+          sudo chown -R $USER:$USER .
+
+      # Remove old rootfs
+      - name: Remove old rootfs
+        run: |
+          rm -rf rootfs
+
+      # Copy squashfs-root safely
+      - name: Copy squashfs-root
+        run: |
+          mkdir -p rootfs
+
+          rsync -a \
+            --exclude dev \
+            --exclude proc \
+            --exclude sys \
+            --exclude tmp \
+            _x-wrt-26.04-b202605170835-ipq806x-generic-ruijie_rg-mtfi-m520-squashfs-factory.bin.extracted/squashfs-root/ \
+            rootfs/
+
+      # Show rootfs content
+      - name: Show rootfs content
+        run: |
+          echo "===== ROOTFS ====="
+          find rootfs | head -200
+
+      # Commit extracted rootfs back to GitHub
+      - name: Commit extracted rootfs
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+          git add rootfs
+
+          git commit -m "Auto extract squashfs-root" || echo "No changes"
+
+          git push
