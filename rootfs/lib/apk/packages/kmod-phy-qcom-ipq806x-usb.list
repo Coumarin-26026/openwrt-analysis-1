@@ -1,0 +1,3 @@
+/etc/modules-boot.d/45-phy-qcom-ipq806x-usb
+/etc/modules.d/45-phy-qcom-ipq806x-usb
+/lib/modules/6.12.89/phy-qcom-ipq806x-usb.ko

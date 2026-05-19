@@ -1,0 +1,4 @@
+/etc/modules.d/nft-netdev
+/lib/modules/6.12.89/nf_dup_netdev.ko
+/lib/modules/6.12.89/nft_dup_netdev.ko
+/lib/modules/6.12.89/nft_fwd_netdev.ko

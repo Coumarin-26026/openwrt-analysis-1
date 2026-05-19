@@ -1,0 +1,2 @@
+/etc/modules.d/50-cryptodev
+/lib/modules/6.12.89/cryptodev.ko

@@ -1,0 +1,7 @@
+/etc/modules.d/09-crypto-user
+/lib/modules/6.12.89/af_alg.ko
+/lib/modules/6.12.89/algif_aead.ko
+/lib/modules/6.12.89/algif_hash.ko
+/lib/modules/6.12.89/algif_rng.ko
+/lib/modules/6.12.89/algif_skcipher.ko
+/lib/modules/6.12.89/crypto_user.ko

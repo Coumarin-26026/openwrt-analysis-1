@@ -1,0 +1,6 @@
+/usr/sbin/defrag.f2fs
+/usr/sbin/dump.f2fs
+/usr/sbin/f2fslabel
+/usr/sbin/fsck.f2fs
+/usr/sbin/resize.f2fs
+/usr/sbin/sload.f2fs

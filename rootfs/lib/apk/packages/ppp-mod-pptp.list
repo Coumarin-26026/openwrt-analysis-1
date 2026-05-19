@@ -1,0 +1,2 @@
+/etc/ppp/options.pptp
+/usr/lib/pppd/2.5.2/pptp.so

@@ -1,0 +1,2 @@
+/etc/modules.d/ipvlan
+/lib/modules/6.12.89/ipvlan.ko

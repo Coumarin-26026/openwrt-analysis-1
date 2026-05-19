@@ -1,0 +1,3 @@
+/etc/modules.d/br-netfilter
+/etc/sysctl.d/11-br-netfilter.conf
+/lib/modules/6.12.89/br_netfilter.ko

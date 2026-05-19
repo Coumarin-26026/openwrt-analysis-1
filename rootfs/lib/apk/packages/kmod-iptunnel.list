@@ -1,0 +1,2 @@
+/etc/modules.d/31-iptunnel
+/lib/modules/6.12.89/ip_tunnel.ko

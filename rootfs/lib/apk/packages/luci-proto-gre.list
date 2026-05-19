@@ -1,0 +1,4 @@
+/www/luci-static/resources/protocol/gre.js
+/www/luci-static/resources/protocol/gretap.js
+/www/luci-static/resources/protocol/grev6.js
+/www/luci-static/resources/protocol/grev6tap.js

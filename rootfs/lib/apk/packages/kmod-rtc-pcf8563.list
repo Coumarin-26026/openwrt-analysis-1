@@ -1,0 +1,2 @@
+/etc/modules.d/rtc-pcf8563
+/lib/modules/6.12.89/rtc-pcf8563.ko

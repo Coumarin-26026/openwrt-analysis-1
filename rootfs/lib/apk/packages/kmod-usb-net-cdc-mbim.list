@@ -1,0 +1,2 @@
+/etc/modules.d/usb-net-cdc-mbim
+/lib/modules/6.12.89/cdc_mbim.ko

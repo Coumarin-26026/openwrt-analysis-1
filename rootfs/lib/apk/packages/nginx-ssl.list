@@ -1,0 +1,10 @@
+/etc/init.d/nginx
+/etc/nginx/fastcgi_params
+/etc/nginx/koi-utf
+/etc/nginx/koi-win
+/etc/nginx/mime.types
+/etc/nginx/scgi_params
+/etc/nginx/uwsgi_params
+/etc/nginx/win-utf
+/lib/upgrade/keep.d/nginx-ssl
+/usr/sbin/nginx

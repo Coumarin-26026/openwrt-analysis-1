@@ -1,0 +1,6 @@
+/etc/config/upnpd
+/etc/hotplug.d/iface/50-miniupnpd
+/etc/init.d/miniupnpd
+/etc/uci-defaults/99-miniupnpd-nft
+/usr/sbin/miniupnpd
+/usr/share/miniupnpd/core.sh

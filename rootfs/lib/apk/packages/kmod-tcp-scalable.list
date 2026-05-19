@@ -1,0 +1,2 @@
+/etc/modules.d/tcp-scalable
+/lib/modules/6.12.89/tcp_scalable.ko

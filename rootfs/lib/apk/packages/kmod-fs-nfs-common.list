@@ -1,0 +1,4 @@
+/etc/modules.d/30-fs-nfs-common
+/lib/modules/6.12.89/grace.ko
+/lib/modules/6.12.89/lockd.ko
+/lib/modules/6.12.89/sunrpc.ko

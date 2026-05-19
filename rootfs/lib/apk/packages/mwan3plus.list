@@ -1,0 +1,16 @@
+/etc/config/mwan3
+/etc/hotplug.d/iface/15-mwan3
+/etc/hotplug.d/iface/16-mwan3-user
+/etc/init.d/mwan3
+/etc/mwan3.user
+/etc/uci-defaults/95-mwan3
+/etc/uci-defaults/mwan3-migrate-flush_conntrack
+/etc/uci-defaults/mwan3-reload-firewall
+/lib/mwan3/common.sh
+/lib/mwan3/libwrap_mwan3_sockopt.so.1.0
+/lib/mwan3/mwan3.sh
+/usr/libexec/rpcd/mwan3
+/usr/sbin/mwan3
+/usr/sbin/mwan3rtmon
+/usr/sbin/mwan3track
+/usr/share/ucitrack/mwan3plus.json

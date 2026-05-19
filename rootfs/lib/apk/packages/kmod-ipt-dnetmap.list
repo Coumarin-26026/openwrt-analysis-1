@@ -1,0 +1,2 @@
+/etc/modules.d/ipt-dnetmap
+/lib/modules/6.12.89/xt_DNETMAP.ko

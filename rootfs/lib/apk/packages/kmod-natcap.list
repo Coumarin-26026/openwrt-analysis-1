@@ -1,0 +1,2 @@
+/etc/modules.d/97-natcap
+/lib/modules/6.12.89/natcap.ko

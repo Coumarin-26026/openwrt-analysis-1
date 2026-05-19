@@ -1,0 +1,2 @@
+/etc/modules.d/hwmon-lm75
+/lib/modules/6.12.89/lm75.ko

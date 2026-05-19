@@ -1,0 +1,2 @@
+/etc/modules.d/30-dnsresolver
+/lib/modules/6.12.89/dns_resolver.ko

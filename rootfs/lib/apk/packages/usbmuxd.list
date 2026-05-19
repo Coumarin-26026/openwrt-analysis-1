@@ -1,0 +1,4 @@
+/etc/hotplug.d/usb/40-usbmuxd
+/etc/init.d/usbmuxd
+/lib/upgrade/keep.d/usbmuxd
+/usr/sbin/usbmuxd

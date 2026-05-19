@@ -1,0 +1,4 @@
+/etc/modules.d/nft-bridge
+/lib/modules/6.12.89/nf_conntrack_bridge.ko
+/lib/modules/6.12.89/nft_meta_bridge.ko
+/lib/modules/6.12.89/nft_reject_bridge.ko

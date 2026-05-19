@@ -1,0 +1,3 @@
+/etc/modules.d/09-crypto-authenc
+/lib/modules/6.12.89/authenc.ko
+/lib/modules/6.12.89/authencesn.ko

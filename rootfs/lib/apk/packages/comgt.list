@@ -1,0 +1,14 @@
+/etc/chatscripts/3g.chat
+/etc/chatscripts/evdo.chat
+/etc/gcom/getcardinfo.gcom
+/etc/gcom/getcarrier.gcom
+/etc/gcom/getcnum.gcom
+/etc/gcom/getimsi.gcom
+/etc/gcom/getstrength.gcom
+/etc/gcom/runcommand.gcom
+/etc/gcom/setmode.gcom
+/etc/gcom/setpin.gcom
+/etc/hotplug.d/tty/30-3g
+/lib/netifd/proto/3g.sh
+/usr/bin/comgt
+/usr/bin/gcom

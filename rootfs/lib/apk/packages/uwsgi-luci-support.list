@@ -1,0 +1,2 @@
+/etc/uwsgi/vassals/luci-cgi_io.ini
+/etc/uwsgi/vassals/luci-webui.ini

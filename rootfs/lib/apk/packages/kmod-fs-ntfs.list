@@ -1,0 +1,2 @@
+/etc/modules.d/fs-ntfs
+/lib/modules/6.12.89/ntfs.ko

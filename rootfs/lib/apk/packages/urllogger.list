@@ -1,0 +1,3 @@
+/etc/init.d/urllogger
+/usr/sbin/urllogger
+/usr/sbin/urllogger-ctl

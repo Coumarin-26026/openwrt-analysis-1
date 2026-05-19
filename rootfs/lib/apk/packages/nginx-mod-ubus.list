@@ -1,0 +1,2 @@
+/etc/nginx/module.d/ngx_http_ubus.module
+/usr/lib/nginx/modules/ngx_http_ubus_module.so

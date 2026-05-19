@@ -1,0 +1,3 @@
+/lib/apk/packages/pciutils.alternatives
+/usr/libexec/lspci-pciutils
+/usr/sbin/setpci

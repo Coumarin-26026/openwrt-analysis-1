@@ -1,0 +1,2 @@
+/etc/modules.d/usb-serial-cp210x
+/lib/modules/6.12.89/cp210x.ko

@@ -1,0 +1,2 @@
+/etc/modules.d/xfrm-interface
+/lib/modules/6.12.89/xfrm_interface.ko

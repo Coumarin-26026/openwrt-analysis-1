@@ -1,0 +1,9 @@
+# This file is auto-generated and build-specific, any changes will be intentionally lost in sysupgrade.
+# Add your custom feeds to /etc/apk/repositories.d/customfeeds.list
+http://downloads.openwrt.org/snapshots/targets/ipq806x/generic/packages/packages.adb
+http://downloads.openwrt.org/snapshots/packages/arm_cortex-a15_neon-vfpv4/base/packages.adb
+http://downloads.openwrt.org/snapshots/packages/arm_cortex-a15_neon-vfpv4/luci/packages.adb
+http://downloads.openwrt.org/snapshots/packages/arm_cortex-a15_neon-vfpv4/packages/packages.adb
+http://downloads.openwrt.org/snapshots/packages/arm_cortex-a15_neon-vfpv4/routing/packages.adb
+http://downloads.openwrt.org/snapshots/packages/arm_cortex-a15_neon-vfpv4/telephony/packages.adb
+http://downloads.openwrt.org/snapshots/packages/arm_cortex-a15_neon-vfpv4/video/packages.adb

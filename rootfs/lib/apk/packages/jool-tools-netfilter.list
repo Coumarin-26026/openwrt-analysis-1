@@ -1,0 +1,9 @@
+/etc/config/jool
+/etc/hotplug.d/net/90-jool-disable-fraglist-gro.sh
+/etc/init.d/jool
+/etc/jool/jool-nat64.conf.json
+/etc/jool/jool-siit.conf.json
+/etc/jool/readme.md
+/usr/bin/jool
+/usr/bin/jool_siit
+/usr/bin/joold

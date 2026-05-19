@@ -1,0 +1,5 @@
+/etc/config/fstab
+/etc/init.d/disk_ready_done
+/etc/init.d/ethtool
+/lib/preinit/79_disk_ready
+/usr/sbin/diskv

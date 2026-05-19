@@ -1,0 +1,4 @@
+/etc/config/ksmbd
+/etc/ksmbd/ksmbd.conf.template
+/etc/ksmbd/ksmbd.conf
+/etc/ksmbd/ksmbdpwd.db

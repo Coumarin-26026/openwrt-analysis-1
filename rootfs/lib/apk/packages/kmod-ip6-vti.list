@@ -1,0 +1,2 @@
+/etc/modules.d/33-ip6-vti
+/lib/modules/6.12.89/ip6_vti.ko

@@ -1,0 +1,10 @@
+/etc/config/ksmbd
+/etc/init.d/ksmbd
+/etc/ksmbd/ksmbd.conf.template
+/etc/ksmbd/ksmbd.config.example
+/lib/upgrade/keep.d/ksmbd-server
+/usr/libexec/ksmbd.tools
+/usr/sbin/ksmbd.addshare
+/usr/sbin/ksmbd.adduser
+/usr/sbin/ksmbd.control
+/usr/sbin/ksmbd.mountd

@@ -1,0 +1,3 @@
+/lib/modules/6.12.89/curve25519-neon.ko
+/lib/modules/6.12.89/libcurve25519-generic.ko
+/lib/modules/6.12.89/libcurve25519.ko

@@ -1,0 +1,8 @@
+/etc/config/pptpd
+/etc/init.d/pptpd
+/etc/ppp/options.pptpd
+/etc/pptpd.conf
+/usr/lib/pptpd/pptpd-logwtmp.so
+/usr/sbin/bcrelay
+/usr/sbin/pptpctrl
+/usr/sbin/pptpd

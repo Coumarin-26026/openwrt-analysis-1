@@ -1,0 +1,3 @@
+/etc/modules.d/nf-socket
+/lib/modules/6.12.89/nf_socket_ipv4.ko
+/lib/modules/6.12.89/nf_socket_ipv6.ko

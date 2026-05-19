@@ -1,0 +1,15 @@
+/etc/uci-defaults/95-natflow
+/usr/lib/lua/luci/i18n/natflow-users.zh-cn.lmo
+/usr/libexec/rpcd/luci.natflow
+/usr/share/luci/menu.d/luci-app-natflow-users.json
+/usr/share/rpcd/acl.d/luci-app-natflow-users.json
+/usr/share/ucitrack/luci-app-natflow-hostacl.json
+/usr/share/ucitrack/luci-app-natflow-qos.json
+/usr/share/ucitrack/luci-app-natflow-simple-qos.json
+/usr/share/ucitrack/luci-app-natflow-users.json
+/www/luci-static/resources/view/network/hostacl.js
+/www/luci-static/resources/view/network/natflow-qos.js
+/www/luci-static/resources/view/status/include/35_natflow-users.js
+/www/luci-static/resources/view/status/natflow-users.js
+/www/luci-static/resources/view/status/urllog.js
+/www/luci-static/resources/view/system/natflow-users.js

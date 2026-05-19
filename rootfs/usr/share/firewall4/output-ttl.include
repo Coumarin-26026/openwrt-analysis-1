@@ -1,0 +1,56 @@
+#!/bin/sh
+# handle option output_ttl in network.@interface[*]
+
+#init
+iptables -t mangle -F mangle_ttl 2>/dev/null || \
+iptables -t mangle -N mangle_ttl
+iptables -t mangle -C POSTROUTING -j mangle_ttl 2>/dev/null || \
+iptables -t mangle -A POSTROUTING -j mangle_ttl
+iptables -t mangle -F mangle_ttl_post 2>/dev/null
+iptables -t mangle -X mangle_ttl_post 2>/dev/null
+
+#init ipv6
+ip6tables -t mangle -F mangle_hotlimit 2>/dev/null || \
+ip6tables -t mangle -N mangle_hotlimit
+ip6tables -t mangle -C POSTROUTING -j mangle_hotlimit 2>/dev/null || \
+ip6tables -t mangle -A POSTROUTING -j mangle_hotlimit
+ip6tables -t mangle -F mangle_hotlimit_post 2>/dev/null
+ip6tables -t mangle -X mangle_hotlimit_post 2>/dev/null
+
+idx=0
+mangle_ttl_init=0
+mangle_hotlimit_init=0
+while uci get network.@interface[$idx] &>/dev/null; do
+	ifn=$(uci show network.@interface[$idx] | head -n1)
+	ifn=${ifn//=interface}
+	ifn=${ifn//network.}
+	ifd=$(ubus call network.interface.$ifn status | jsonfilter -e '$["l3_device"]')
+
+	ttl=$(uci get network.@interface[$idx].output_ttl 2>/dev/null)
+	if test -n "$ttl" && test -n "$ifd"; then
+		if [ "$mangle_ttl_init" = "0" ]; then
+			mangle_ttl_init=1
+			iptables -t mangle -N mangle_ttl_post
+			iptables -t mangle -A mangle_ttl_post -m ttl --ttl-eq 1 -j RETURN
+			iptables -t mangle -A mangle_ttl_post -m ttl --ttl-eq 255 -j RETURN
+			iptables -t mangle -A mangle_ttl_post -p udp -m ttl --ttl-gt 1 -j TTL --ttl-set $ttl
+			iptables -t mangle -A mangle_ttl_post -p tcp -m ttl --ttl-gt 1 -j TTL --ttl-set $ttl
+			iptables -t mangle -A mangle_ttl_post -p icmp -m ttl --ttl-gt 1 -j TTL --ttl-set $ttl
+		fi
+		iptables -t mangle -A mangle_ttl -o "$ifd" -j mangle_ttl_post
+	fi
+	hl=$(uci get network.@interface[$idx].output_hotlimit 2>/dev/null)
+	if test -n "$hl" && test -n "$ifd"; then
+		if [ "$mangle_hotlimit_init" = "0" ]; then
+			mangle_hotlimit_init=1
+			ip6tables -t mangle -N mangle_hotlimit_post
+			ip6tables -t mangle -A mangle_hotlimit_post -m hl --hl-eq 1 -j RETURN
+			ip6tables -t mangle -A mangle_hotlimit_post -m hl --hl-eq 255 -j RETURN
+			ip6tables -t mangle -A mangle_hotlimit_post -p udp -m hl --hl-gt 1 -j HL --hl-set $hl
+			ip6tables -t mangle -A mangle_hotlimit_post -p tcp -m hl --hl-gt 1 -j HL --hl-set $hl
+			ip6tables -t mangle -A mangle_hotlimit_post -p ipv6-icmp -m hl --hl-gt 1 -j HL --hl-set $hl
+		fi
+		ip6tables -t mangle -A mangle_hotlimit -o "$ifd" -j mangle_hotlimit_post
+	fi
+	idx=$((idx+1))
+done

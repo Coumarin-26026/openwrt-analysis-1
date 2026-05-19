@@ -1,0 +1,12 @@
+/etc/config/radius
+/etc/init.d/radius
+/etc/radius/clients
+/etc/radius/users
+/lib/apk/packages/wpad-openssl.rusers
+/lib/upgrade/keep.d/wpad-openssl
+/usr/sbin/hostapd
+/usr/sbin/hostapd-radius
+/usr/sbin/wpa_supplicant
+/usr/sbin/wpad
+/usr/share/hostap/hostapd.uc
+/usr/share/hostap/wpa_supplicant.uc

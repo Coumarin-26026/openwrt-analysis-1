@@ -1,0 +1,3 @@
+/etc/init.d/uwsgi
+/etc/uwsgi/emperor.ini
+/usr/sbin/uwsgi

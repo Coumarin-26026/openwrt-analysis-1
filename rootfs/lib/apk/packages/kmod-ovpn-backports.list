@@ -1,0 +1,2 @@
+/etc/modules.d/30-ovpn-backports
+/lib/modules/6.12.89/ovpn.ko

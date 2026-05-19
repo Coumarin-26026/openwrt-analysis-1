@@ -1,0 +1,4 @@
+/etc/modules.d/48-jool-netfilter
+/lib/modules/6.12.89/jool.ko
+/lib/modules/6.12.89/jool_common.ko
+/lib/modules/6.12.89/jool_siit.ko

@@ -1,0 +1,4 @@
+/etc/modules.d/41-fs-nfs-v4
+/lib/modules/6.12.89/nfs_layout_flexfiles.ko
+/lib/modules/6.12.89/nfs_layout_nfsv41_files.ko
+/lib/modules/6.12.89/nfsv4.ko

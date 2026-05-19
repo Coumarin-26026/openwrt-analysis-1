@@ -1,0 +1,4 @@
+/etc/config/umdns
+/etc/init.d/umdns
+/usr/sbin/umdns
+/usr/share/ucode/cli/modules/mdns.uc

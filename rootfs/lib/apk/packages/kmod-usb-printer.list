@@ -1,0 +1,2 @@
+/etc/modules.d/usb-printer
+/lib/modules/6.12.89/usblp.ko

@@ -1,0 +1,2 @@
+/etc/modules.d/usb-net-cdc-ether
+/lib/modules/6.12.89/cdc_ether.ko

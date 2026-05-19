@@ -1,0 +1,4 @@
+/etc/config/aria2
+/etc/init.d/aria2
+/lib/apk/packages/aria2.rusers
+/usr/bin/aria2c

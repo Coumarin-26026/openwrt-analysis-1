@@ -1,0 +1,3 @@
+/etc/config/nginx
+/etc/nginx/restrict_locally
+/etc/nginx/uci.conf.template

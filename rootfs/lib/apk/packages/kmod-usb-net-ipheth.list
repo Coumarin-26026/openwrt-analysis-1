@@ -1,0 +1,2 @@
+/etc/modules.d/usb-net-ipheth
+/lib/modules/6.12.89/ipheth.ko
