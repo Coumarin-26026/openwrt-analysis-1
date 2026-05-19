@@ -1,0 +1,62 @@
+name: Extract Firmware
+
+on:
+  workflow_dispatch:
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Clone repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Cài tool
+      - name: Install tools
+        run: |
+          sudo apt update
+
+          sudo apt install -y \
+            binwalk \
+            squashfs-tools \
+            p7zip-full \
+            file \
+            tar
+
+      # Hiện file repo
+      - name: Show repository files
+        run: |
+          echo "===== REPOSITORY FILES ====="
+          ls -lah
+
+      # Extract firmware
+      - name: Extract firmware
+        run: |
+          sudo binwalk --run-as=root -eM \
+          x-wrt-26.04-b202605170835-ipq806x-generic-ruijie_rg-mtfi-m520-squashfs-factory.bin
+
+      # Hiện file extract
+      - name: Show extracted files
+        run: |
+          echo "===== EXTRACTED FILES ====="
+          find . | head -200
+
+      # Fix permission
+      - name: Fix permissions
+        run: |
+          sudo chmod -R 755 .
+          sudo chown -R $USER:$USER .
+
+      # Nén kết quả để tránh lỗi ký tự :
+      - name: Compress extracted firmware
+        run: |
+          tar -czf extracted-firmware.tar.gz _x-wrt-*
+
+      # Upload artifact
+      - name: Upload extracted firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: extracted-firmware
+          path: extracted-firmware.tar.gz
