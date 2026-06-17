@@ -1,0 +1,51 @@
+name: Extract RPCS3 App
+
+on:
+  workflow_dispatch:
+
+jobs:
+  extract:
+    runs-on: macos-14
+
+    steps:
+      - name: Download RPCS3 DMG
+        run: |
+          curl -L \
+            https://github.com/RPCS3/rpcs3-binaries-mac/releases/latest/download/rpcs3-macos.dmg \
+            -o rpcs3-macos.dmg
+
+      - name: Mount DMG
+        run: |
+          hdiutil attach rpcs3-macos.dmg -nobrowse
+
+      - name: Copy App
+        run: |
+          mkdir output
+          cp -R /Volumes/RPCS3*/RPCS3.app output/
+
+      - name: Remove Quarantine
+        run: |
+          xattr -dr com.apple.quarantine output/RPCS3.app || true
+
+      - name: Adhoc Sign
+        run: |
+          codesign --force --deep --sign - output/RPCS3.app
+
+      - name: Create ZIP
+        run: |
+          cd output
+          ditto -c -k --sequesterRsrc --keepParent \
+            RPCS3.app \
+            RPCS3-macOS-arm64.zip
+
+      - name: Upload App
+        uses: actions/upload-artifact@v4
+        with:
+          name: RPCS3-App
+          path: output/RPCS3.app
+
+      - name: Upload ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: RPCS3-ZIP
+          path: output/RPCS3-macOS-arm64.zip
