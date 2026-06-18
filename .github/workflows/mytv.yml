@@ -17,8 +17,13 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wget unzip
-          wget https://github.com/skylot/jadx/releases/latest/download/jadx-1.5.2.zip
-          unzip jadx-1.5.2.zip -d jadx
+      
+          JADX_VER=1.5.5
+      
+          wget -O jadx.zip \
+            https://github.com/skylot/jadx/releases/download/v${JADX_VER}/jadx-${JADX_VER}.zip
+      
+          unzip jadx.zip -d jadx
 
       - name: Download APKM
         run: |
