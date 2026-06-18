@@ -1,0 +1,33 @@
+name: Extract MyTV APKM
+
+on:
+  workflow_dispatch:
+
+env:
+  APK_URL: "https://drive.usercontent.google.com/download?id=1G89z17z-q6KG1rgLuXCndB2e12D77O14&export=download&authuser=0&confirm=t&uuid=c60681e6-79bc-482b-ac39-51816113cfcd&at=AAINaIK0M-gDOu4g1dSKgpzYgzfY:1781799492943"
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl unzip
+
+      - name: Download APKM
+        run: |
+          mkdir apk
+          curl -L "$APK_URL" -o apk/mytv.apkm
+
+      - name: Extract APKM
+        run: |
+          unzip apk/mytv.apkm -d extracted
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: extracted-apkm
+          path: extracted
