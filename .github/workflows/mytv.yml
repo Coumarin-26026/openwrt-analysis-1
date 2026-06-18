@@ -45,11 +45,18 @@ jobs:
           ls -lah apk/extracted
 
       - name: Decompile base.apk
+        continue-on-error: true
         run: |
-          mkdir output
-          ./jadx/bin/jadx \
+          mkdir -p output
+      
+          jadx/bin/jadx \
             -d output \
             apk/extracted/base.apk
+
+      - name: Check output
+        run: |
+          du -sh output || true
+          find output -type f | wc -l      
 
       - name: Compress source
         run: |
