@@ -35,6 +35,11 @@ jobs:
         run: |
           unzip apk/mytv.apkm -d apk/extracted
 
+      - name: Make JADX executable
+        run: |
+          chmod +x jadx/bin/jadx
+          chmod +x jadx/bin/jadx-gui || true    
+
       - name: Verify files
         run: |
           ls -lah apk/extracted
