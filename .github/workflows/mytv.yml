@@ -11,63 +11,115 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
+      - name: Checkout
+        uses: actions/checkout@v4
+    
       - name: Install JADX
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget unzip
-      
+          sudo apt-get install -y wget unzip curl
+    
           JADX_VER=1.5.5
-      
+    
           wget -O jadx.zip \
             https://github.com/skylot/jadx/releases/download/v${JADX_VER}/jadx-${JADX_VER}.zip
-      
-          unzip jadx.zip -d jadx
-
+    
+          unzip -q jadx.zip -d jadx
+    
+          chmod -R +x jadx/bin
+    
+          jadx/bin/jadx --version
+    
       - name: Download APKM
         run: |
-          mkdir apk
+          mkdir -p apk
+    
           curl -L "$APK_URL" \
             -o apk/mytv.apkm
-
+    
+          ls -lh apk/mytv.apkm
+    
       - name: Extract APKM
         run: |
-          unzip apk/mytv.apkm -d apk/extracted
-
-      - name: Make JADX executable
-        run: |
-          chmod +x jadx/bin/jadx
-          chmod +x jadx/bin/jadx-gui || true    
-
-      - name: Verify files
-        run: |
+          mkdir -p apk/extracted
+    
+          unzip -q apk/mytv.apkm \
+            -d apk/extracted
+    
           ls -lah apk/extracted
-
+    
+      - name: Verify APK
+        run: |
+          file apk/extracted/base.apk
+          ls -lh apk/extracted/base.apk
+    
       - name: Decompile base.apk
         continue-on-error: true
         run: |
           mkdir -p output
-      
+    
           jadx/bin/jadx \
             -d output \
             apk/extracted/base.apk
-
+    
       - name: Check output
         run: |
           du -sh output || true
-          find output -type f | wc -l      
-
+          find output -type f | wc -l || true
+    
+      - name: Find MyTV APIs
+        run: |
+          touch api.txt
+    
+          echo "===== DOMAINS =====" >> api.txt
+    
+          grep -R "apigw.mytv.vn" output >> api.txt || true
+          grep -R "accs.mytv.vn" output >> api.txt || true
+          grep -R "drmtoday" output >> api.txt || true
+          grep -R "mytv.vn" output >> api.txt || true
+    
+          echo "" >> api.txt
+          echo "===== RETROFIT =====" >> api.txt
+    
+          grep -R "retrofit2" output >> api.txt || true
+          grep -R "Retrofit" output >> api.txt || true
+          grep -R "@GET" output >> api.txt || true
+          grep -R "@POST" output >> api.txt || true
+    
+          echo "" >> api.txt
+          echo "===== API KEYWORDS =====" >> api.txt
+    
+          grep -R "login" output >> api.txt || true
+          grep -R "token" output >> api.txt || true
+          grep -R "channel" output >> api.txt || true
+          grep -R "play" output >> api.txt || true
+          grep -R "stream" output >> api.txt || true
+          grep -R "live" output >> api.txt || true
+          grep -R "drm" output >> api.txt || true
+    
+          wc -l api.txt
+    
       - name: Compress source
         run: |
           tar -czf mytv-source.tar.gz output
-
-      - uses: actions/upload-artifact@v4
+    
+      - name: Upload API Analysis
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: api-analysis
+          path: api.txt
+    
+      - name: Upload Source Archive
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: mytv-source
           path: mytv-source.tar.gz
-
-      - uses: actions/upload-artifact@v4
+    
+      - name: Upload Decompiled Output
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: jadx-output
           path: output
