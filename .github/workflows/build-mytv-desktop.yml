@@ -1,0 +1,103 @@
+name: Build MyTV Desktop
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create SwiftUI project
+        run: |
+          mkdir -p MyTVDesktop
+
+          cat > MyTVDesktop/MyTVDesktopApp.swift << 'EOF'
+          import SwiftUI
+
+          @main
+          struct MyTVDesktopApp: App {
+              var body: some Scene {
+                  WindowGroup {
+                      ContentView()
+                  }
+              }
+          }
+          EOF
+
+          cat > MyTVDesktop/ContentView.swift << 'EOF'
+          import SwiftUI
+          import WebKit
+
+          struct WebView: NSViewRepresentable {
+              let url: URL
+
+              func makeNSView(context: Context) -> WKWebView {
+                  let webView = WKWebView()
+                  webView.load(URLRequest(url: url))
+                  return webView
+              }
+
+              func updateNSView(_ nsView: WKWebView, context: Context) {}
+          }
+
+          struct ContentView: View {
+              var body: some View {
+                  WebView(
+                      url: URL(string: "https://mytv.vn")!
+                  )
+              }
+          }
+          EOF
+
+      - name: Generate Xcode Project
+        run: |
+          mkdir -p MyTVDesktop.xcodeproj
+
+          cat > project.yml << 'EOF'
+          name: MyTVDesktop
+
+          targets:
+            MyTVDesktop:
+              type: application
+              platform: macOS
+
+              sources:
+                - MyTVDesktop
+
+              settings:
+                base:
+                  PRODUCT_BUNDLE_IDENTIFIER: vn.mytv.desktop
+                  MACOSX_DEPLOYMENT_TARGET: 12.0
+          EOF
+
+          brew install xcodegen
+          xcodegen generate
+
+      - name: Build
+        run: |
+          xcodebuild \
+            -project MyTVDesktop.xcodeproj \
+            -scheme MyTVDesktop \
+            -configuration Release \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Package App
+        run: |
+          mkdir artifact
+
+          APP=$(find ~/Library/Developer/Xcode/DerivedData \
+            -name "MyTVDesktop.app" | head -n 1)
+
+          cp -R "$APP" artifact/
+
+          cd artifact
+          zip -r MyTVDesktop-macOS.zip MyTVDesktop.app
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MyTVDesktop-macOS
+          path: artifact/MyTVDesktop-macOS.zip
