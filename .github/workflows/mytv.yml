@@ -1,0 +1,56 @@
+name: Decompile MyTV APK
+
+on:
+  workflow_dispatch:
+
+env:
+  APK_URL: "https://drive.usercontent.google.com/download?id=1G89z17z-q6KG1rgLuXCndB2e12D77O14&export=download&authuser=0&confirm=t"
+
+jobs:
+  decompile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install JADX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget https://github.com/skylot/jadx/releases/latest/download/jadx-1.5.2.zip
+          unzip jadx-1.5.2.zip -d jadx
+
+      - name: Download APKM
+        run: |
+          mkdir apk
+          curl -L "$APK_URL" \
+            -o apk/mytv.apkm
+
+      - name: Extract APKM
+        run: |
+          unzip apk/mytv.apkm -d apk/extracted
+
+      - name: Verify files
+        run: |
+          ls -lah apk/extracted
+
+      - name: Decompile base.apk
+        run: |
+          mkdir output
+          ./jadx/bin/jadx \
+            -d output \
+            apk/extracted/base.apk
+
+      - name: Compress source
+        run: |
+          tar -czf mytv-source.tar.gz output
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mytv-source
+          path: mytv-source.tar.gz
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jadx-output
+          path: output
